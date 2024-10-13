@@ -1,157 +1,124 @@
-# **Myntra Sales Analysis Power BI Dashboard**
+# End-to-End Data Analysis Project Using Python, MySQL, and Power BI
 
-## **Project Overview**
-The **Myntra Sales Analysis Project** aims to explore, analyze, and visualize the sales, customer distribution, and product performance data of Myntra, using a Power BI dashboard. The goal of the project is to provide meaningful insights into sales trends, customer demographics, and product performance to assist in strategic business decision-making.
+This project demonstrates a comprehensive end-to-end data analysis process using Python for data cleaning, MySQL for structured data storage, and Power BI for building interactive dashboards. The project walks through essential steps such as understanding the dataset, setting up the database, performing data cleaning, and building insightful visualizations.
 
-This README outlines the steps taken in the project, tools used, and key insights derived from the analysis.
+## Project Structure
 
----
+data_analysis_project/  
+│  
+├── data/  
+│   ├── Myntra dataset.xlsx           # Original dataset  
+│   ├── dim_products_clean.csv        # Cleaned product data for Power BI  
+│   ├── dim_customers_clean.csv       # Cleaned customer data for Power BI  
+│   └── fact_orders_clean.csv         # Cleaned orders data for Power BI  
+│  
+├── mysql_scripts/  
+│   └── create_tables.sql             # SQL script to create tables in MySQL  
+│  
+├── python_scripts/  
+│   ├── load_data.py                  # Python script to load data into MySQL  
+│   ├── clean_data.py                 # Python script for data cleaning and preprocessing  
+│   ├── analyze_data.py               # Python script for performing analysis on the data  
+│   └── visualize_sales.py            # Python script for sales trend visualization  
+│  
+├── power_bi_dashboard/  
+│   ├── dashboard.pbix                # Power BI project file  
+│   └── dashboard_instructions.md     # Instructions for Power BI dashboard setup  
+│  
+└── README.md                         # Project overview and instructions (this file)
 
-## **Objectives**
-- To analyze **sales performance** by product category and individual products.
-- To understand **monthly sales trends** and identify any seasonal patterns.
-- To analyze **customer distribution** across different geographical regions.
-- To assess the impact of **discounts** on sales and revenue.
-- To create an **interactive Power BI dashboard** that provides business insights and aids decision-making.
+## Requirements
 
----
+- Python 3.x
+- MySQL (local or remote server)
+- Power BI Desktop
+- Required Python packages:
+  - `pandas`
+  - `mysql-connector-python`
+  - `matplotlib`
 
-## **Tools Used**
-- **Python**: For data cleaning, preprocessing, and initial aggregation of sales data.
-- **SQL**: To create and manage the database of products, customers, and orders.
-- **Power BI**: For data visualization, dashboard creation, and final analysis.
+## Dataset Overview
 
----
+The dataset contains three sheets:
 
-## **Data Used**
+1. **dim_products**: Product details, including category, brand, size, and ratings.
+2. **dim_customers**: Customer information, including age, city, and state.
+3. **fact_orders**: Transaction data, including order date, product price, and discount.
 
-### 1. **cleaned_fact_orders.csv**:
-   - Contains detailed order data, including:
-     - Order ID
-     - Customer ID
-     - Product ID
-     - Order Date
-     - Original Price
-     - Discount Percent
+## Steps
 
-### 2. **monthly_sales.csv**:
-   - Aggregated data showing total sales by month.
-   - Columns:
-     - Order Date (monthly aggregation)
-     - Total Sales (Original Price)
+### 1. **Data Structure Overview**
 
-### 3. **sales_by_category.csv**:
-   - Data showing total sales by Product ID (and optionally Product Category if merged).
-   - Columns:
-     - Product ID
-     - Total Sales (Original Price)
+The dataset contains three sheets (`dim_products`, `dim_customers`, and `fact_orders`). The structure is as follows:
 
----
+- **dim_products**: Contains product-related information like category, sub-category, product name, brand name, size, and ratings.
+- **dim_customers**: Contains customer-related information such as customer age, city, and state.
+- **fact_orders**: Contains order-related information including order ID, customer ID, product ID, order date, original price, and discount percentage.
 
-## **Data Cleaning and Preprocessing**
+### 2. **Setting Up MySQL Database**
 
-Before analyzing the data in Power BI, the following cleaning and transformation steps were conducted using Python:
+You can find the SQL script to create the necessary tables in the `mysql_scripts/create_tables.sql` file.
 
-1. **Handled missing data**:
-   - Missing values in key columns were dropped.
-   
-2. **Removed duplicates**:
-   - Ensured no duplicate records existed in the data to maintain accuracy.
-   
-3. **Date formatting**:
-   - Converted `Order_Date` fields to datetime format for easier time-series analysis.
+- Run the script in your MySQL Workbench or any SQL environment.
 
-4. **Aggregated data**:
-   - Monthly sales data and sales by product were aggregated to create summary views for easier visualization in Power BI.
+  Example:
 
----
+  ```sql
+  CREATE DATABASE myntra_data_analysis;
+  USE myntra_data_analysis;
 
-## **Power BI Dashboard**
+  -- Create tables (dim_products, dim_customers, fact_orders)
+  -- Refer to the `create_tables.sql` for full details
+  ```
 
-The Power BI dashboard consists of multiple interactive visuals that allow users to explore sales, product performance, and customer distribution. The following are the key components of the dashboard:
+### 3. **Data Cleaning and Loading**
 
-### 1. **Bar Chart: Sales by Product ID**
-   - **Purpose**: Displays the total sales for each product.
-   - **Insights**: Helps identify which products are generating the highest revenue and which may require further attention.
+The data cleaning process is handled in Python. Refer to the `python_scripts/clean_data.py` to clean the data and save the cleaned CSV files for use in Power BI.
 
-### 2. **Line Chart: Monthly Sales Trends**
-   - **Purpose**: Visualizes the monthly sales trends over time.
-   - **Insights**: Highlights seasonal peaks and troughs in sales performance, helping to identify patterns such as promotional impacts or seasonal demand.
+Run the cleaning script:
 
-### 3. **Map: Customer Distribution by State**
-   - **Purpose**: Shows the geographical distribution of customers based on their state.
-   - **Insights**: Reveals the areas with the highest customer engagement, allowing for region-specific marketing strategies and product focus.
+```bash
+python python_scripts/clean_data.py
+```
 
-### 4. **Card Visuals: Key Metrics**
-   - **Purpose**: Displays key business metrics like:
-     - **Total Sales**
-     - **Total Customers**
-     - **Average Discount Percent**
-   - **Insights**: Provides an at-a-glance view of important performance indicators.
+After cleaning, use the `load_data.py` script to load data into MySQL:
 
-### 5. **Slicers: Interactive Filters**
-   - **Purpose**: Allows users to filter the entire dashboard by:
-     - Date (Year, Month)
-     - Product Category (if merged with category data)
-   - **Insights**: Enables interactive exploration of the data, allowing for focused analysis on specific products, time periods, or regions.
+```bash
+python python_scripts/load_data.py
+```
 
----
+### 4. **Power BI Dashboard**
 
-## **Key Insights**
+Follow the steps below to load the data into Power BI and create visualizations:
 
-### **A. Product Sales Analysis**
-- **Top-Performing Products**: Product IDs `P001`, `P002`, and `P003` were the highest contributors to total sales.
-- **Sales by Category**: (If product categories were used) Women's footwear and topwear categories generated the majority of sales.
+1. Open Power BI Desktop.
+2. Go to **Home > Get Data > MySQL Database**.
+3. Enter your MySQL server details, select the database `myntra_data_analysis`, and load the tables (`dim_products_clean.csv`, `dim_customers_clean.csv`, `fact_orders_clean.csv`).
+4. Create the following key visuals:
+   - **Bar Chart**: Sales by Product Category.
+   - **Line Chart**: Sales Trends Over Time.
+   - **Map**: Customer Distribution by State.
+5. Add slicers for **Order Date**, **Category**, and **State** for interactivity.
+6. Format and enhance the dashboard as needed.
 
-### **B. Sales Trends**
-- **Seasonal Peaks**: The months of November and December showed significant increases in sales, possibly due to festive sales or promotions.
-- **Sales Decline**: Sales dipped during mid-year months like July and August, highlighting a potential opportunity for mid-year promotions.
+## Key Visuals in Power BI
 
-### **C. Customer Distribution**
-- **Geographical Insights**: Most customers are concentrated in states like **Maharashtra**, **Delhi**, and **Karnataka**, while some regions like **North-East India** have lower customer engagement.
-- **Recommendations**: Consider targeting underperforming regions with marketing campaigns or product launches.
+1. **Bar Chart: Sales by Product Category**
+   - X-axis: `Category` (from `dim_products`)
+   - Y-axis: `Original Price` (from `fact_orders`)
 
-### **D. Discount Analysis**
-- **Impact of Discounts**: Products with higher discounts showed a marked increase in sales, but profitability might need to be reviewed. Consider balancing discount strategies to maintain profit margins.
+2. **Line Chart: Sales Trends Over Time**
+   - X-axis: `Date` (from `fact_orders`)
+   - Y-axis: `Original Price`
 
----
+3. **Map: Customer Distribution by State**
+   - Location: `State` (from `dim_customers`)
+   - Size: `Customer_ID` (to show number of customers per state)
 
-## **Recommendations**
+## Conclusion
 
-1. **Stock Management**:
-   - Increase stock for top-selling products and categories based on sales data.
-   - Consider phasing out or re-marketing low-performing products to improve profitability.
+This project provides a structured workflow from data cleaning and analysis using Python to visualization with Power BI, all while leveraging the efficiency of a MySQL database for data storage. The dashboard allows users to interact with the data, providing insights into customer demographics, sales trends, and product performance.
 
-2. **Targeted Marketing**:
-   - Focus marketing efforts in high-customer regions like Maharashtra and Karnataka to drive even more engagement.
-   - Run specific promotions or campaigns in regions with low engagement to attract new customers.
+## Additional Files
 
-3. **Seasonal Promotions**:
-   - Leverage high-performing months (November, December) with special promotions to maximize sales during peak demand periods.
-   - Use slow months (like July and August) to create demand with targeted discounts or new product launches.
-
-4. **Discount Strategy**:
-   - Review discount levels to ensure they’re driving sufficient sales to justify reduced profit margins. Consider offering targeted discounts to specific customer segments to maintain profitability.
-
----
-
-## **Project Conclusion**
-
-The **Myntra Sales Analysis Power BI Dashboard** successfully provides a detailed overview of sales performance, product demand, and customer behavior. The insights derived from this project can help Myntra make data-driven decisions for inventory management, marketing strategies, and discount policies. By leveraging the interactive features of Power BI, stakeholders can explore the data further and uncover deeper insights that guide future business strategies.
-
----
-
-## **How to Use the Dashboard**
-
-1. **Open the Power BI Dashboard**: The `.pbix` file contains all the data visualizations and insights.
-2. **Interact with the Filters**: Use slicers to explore data by date or product category.
-3. **View Key Metrics**: At the top of the dashboard, key metrics like total sales, customers, and discounts are provided for easy reference.
-
----
-
-## **Future Improvements**
-
-- **Predictive Modeling**: Incorporating machine learning models to predict future sales trends based on past data.
-- **Real-Time Data**: Connecting the Power BI dashboard to live data sources for real-time analysis and decision-making.
-- **Customer Segmentation**: Using clustering techniques to segment customers based on behavior and purchasing patterns for more personalized marketing.
-
+The cleaned CSV files (`dim_products_clean.csv`, `dim_customers_clean.csv`, `fact_orders_clean.csv`) are included in the `data/` folder and can be used directly in Power BI or for further analysis.
