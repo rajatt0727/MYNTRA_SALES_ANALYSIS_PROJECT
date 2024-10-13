@@ -1,4 +1,4 @@
-# End-to-End Data Analysis Project Using Python, MySQL, and Power BI
+# Myyntra Dataset End-to-End Data Analysis Project Using Python, MySQL, and Power BI
 
 This project demonstrates a comprehensive end-to-end data analysis process using Python for data cleaning, MySQL for structured data storage, and Power BI for building interactive dashboards. The project walks through essential steps such as understanding the dataset, setting up the database, performing data cleaning, and building insightful visualizations.
 
