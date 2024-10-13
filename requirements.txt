@@ -1,0 +1,10 @@
+Python_libraries
+{
+    pandas
+    matplotlib
+    openpyxl
+}
+
+Power_Bi_Desktop
+Mysql_for_sql_queries
+
